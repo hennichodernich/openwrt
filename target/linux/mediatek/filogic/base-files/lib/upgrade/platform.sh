@@ -40,13 +40,15 @@ xiaomi_initial_setup()
 		return 0
 	fi
 
-	fw_setenv boot_wait on
-	fw_setenv uart_en 1
-	fw_setenv flag_boot_rootfs 0
-	fw_setenv flag_last_success 1
-	fw_setenv flag_boot_success 1
-	fw_setenv flag_try_sys1_failed 8
-	fw_setenv flag_try_sys2_failed 8
+	fw_setenv -s - <<-EOF
+		boot_wait on
+		uart_en 1
+		flag_boot_rootfs 0
+		flag_last_success 1
+		flag_boot_success 1
+		flag_try_sys1_failed 8
+		flag_try_sys2_failed 8
+	EOF
 
 	local board=$(board_name)
 	case "$board" in
@@ -69,6 +71,7 @@ platform_do_upgrade() {
 	bananapi,bpi-r3-mini|\
 	bananapi,bpi-r4|\
 	bananapi,bpi-r4-poe|\
+	cmcc,a10-ubootmod|\
 	cmcc,rax3000m|\
 	gatonetworks,gdsp|\
 	h3c,magic-nx30-pro|\
@@ -116,6 +119,10 @@ platform_do_upgrade() {
 	asus,tuf-ax6000)
 		CI_UBIPART="UBI_DEV"
 		CI_KERNPART="linux"
+		nand_do_upgrade "$1"
+		;;
+	cudy,wr3000h-v1)
+		CI_UBIPART="ubi"
 		nand_do_upgrade "$1"
 		;;
 	cudy,re3000-v1|\

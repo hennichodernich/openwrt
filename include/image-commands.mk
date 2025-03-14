@@ -438,13 +438,14 @@ endef
 
 define Build/jffs2
 	rm -rf $(KDIR_TMP)/$(DEVICE_NAME)/jffs2 && \
-		mkdir -p $(KDIR_TMP)/$(DEVICE_NAME)/jffs2/$$(dirname $(1)) && \
-		cp $@ $(KDIR_TMP)/$(DEVICE_NAME)/jffs2/$(1) && \
+		mkdir -p $(KDIR_TMP)/$(DEVICE_NAME)/jffs2/$$(dirname $(word 1,$(1))) && \
+		cp $@ $(KDIR_TMP)/$(DEVICE_NAME)/jffs2/$(word 1,$(1)) && \
 		$(STAGING_DIR_HOST)/bin/mkfs.jffs2 --pad \
 			$(if $(CONFIG_BIG_ENDIAN),--big-endian,--little-endian) \
 			--squash-uids -v -e $(patsubst %k,%KiB,$(BLOCKSIZE)) \
 			-o $@.new \
 			-d $(KDIR_TMP)/$(DEVICE_NAME)/jffs2 \
+			$(wordlist 2,$(words $(1)),$(1)) \
 			2>&1 1>/dev/null | awk '/^.+$$$$/' && \
 		$(STAGING_DIR_HOST)/bin/padjffs2 $@.new -J $(patsubst %k,,$(BLOCKSIZE))
 	-rm -rf $(KDIR_TMP)/$(DEVICE_NAME)/jffs2/
@@ -624,6 +625,14 @@ define Build/sysupgrade-tar
 		--kernel $(call param_get_default,kernel,$(1),$(IMAGE_KERNEL)) \
 		--rootfs $(call param_get_default,rootfs,$(1),$(IMAGE_ROOTFS)) \
 		$@
+endef
+
+define Build/tplink-image-2022
+	$(TOPDIR)/scripts/tplink-mkimage-2022.py  \
+		--create $@.new \
+		--rootfs $@ \
+		--support "$(TPLINK_SUPPORT_STRING)"
+	@mv $@.new $@
 endef
 
 define Build/tplink-safeloader

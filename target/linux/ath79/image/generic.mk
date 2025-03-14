@@ -1681,6 +1681,23 @@ define Device/fortinet_fap-221-b
 endef
 TARGET_DEVICES += fortinet_fap-221-b
 
+define Device/fortinet_fap-221-c
+  $(Device/senao_loader_okli)
+  SOC := qca9557
+  DEVICE_VENDOR := Fortinet
+  DEVICE_MODEL := FAP-221-C
+  FACTORY_IMG_NAME := FP221C-9.99-AP-build999-999999-patch99
+  DEVICE_PACKAGES := ath10k-firmware-qca988x-ct kmod-ath10k-ct
+  IMAGE_SIZE := 20480k
+  LOADER_FLASH_OFFS := 0x040000
+  IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | \
+        append-rootfs | pad-rootfs | \
+        check-size | pad-to $$$$(IMAGE_SIZE) | \
+        append-loader-okli-uimage $(1) | pad-to 11520k | \
+        gzip-filename $$$$(FACTORY_IMG_NAME)
+endef
+TARGET_DEVICES += fortinet_fap-221-c
+
 define Device/glinet_6408
   $(Device/tplink-8mlzma)
   SOC := ar9331
@@ -2953,6 +2970,17 @@ define Device/ruckus_zf7372
 endef
 TARGET_DEVICES += ruckus_zf7372
 
+define Device/ruckus_r500
+  $(Device/ruckus_common)
+  SOC := qca9557
+  DEVICE_MODEL := R500
+  IMAGE_SIZE := 63744k
+  BLOCKSIZE := 256k
+  DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca988x-ct \
+		     kmod-i2c-gpio kmod-tpm-i2c-infineon
+endef
+TARGET_DEVICES += ruckus_r500
+
 define Device/samsung_wam250
   SOC := ar9344
   DEVICE_VENDOR := Samsung
@@ -3075,8 +3103,11 @@ define Device/teltonika_rut230-v1
   DEVICE_VENDOR := Teltonika
   DEVICE_MODEL := RUT230
   DEVICE_VARIANT := v1
-  DEVICE_PACKAGES := kmod-usb-chipidea2 kmod-usb-acm kmod-usb-net-qmi-wwan \
-	uqmi -uboot-envtools
+  DEVICE_ALT0_VENDOR := Teltonika
+  DEVICE_ALT0_MODEL := RUT240
+  DEVICE_ALT0_VARIANT := v1
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-chipidea2 kmod-usb-acm \
+	kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi -uboot-envtools
   IMAGE_SIZE := 15552k
   TPLINK_HWID := 0x32200002
   TPLINK_HWREV := 0x1

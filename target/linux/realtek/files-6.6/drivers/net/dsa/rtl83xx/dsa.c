@@ -686,6 +686,7 @@ static void rtl83xx_phylink_get_caps(struct dsa_switch *ds, int port,
 	__set_bit(PHY_INTERFACE_MODE_XGMII, config->supported_interfaces);
 	__set_bit(PHY_INTERFACE_MODE_USXGMII, config->supported_interfaces);
 	__set_bit(PHY_INTERFACE_MODE_1000BASEX, config->supported_interfaces);
+	__set_bit(PHY_INTERFACE_MODE_10GBASER, config->supported_interfaces);
 }
 
 static void rtl83xx_phylink_mac_config(struct dsa_switch *ds, int port,
@@ -813,6 +814,7 @@ static void rtl93xx_phylink_mac_config(struct dsa_switch *ds, int port,
 	pr_info("%s SDS is %d\n", __func__, sds_num);
 	if (sds_num >= 0 &&
 	    (state->interface == PHY_INTERFACE_MODE_1000BASEX ||
+	     state->interface == PHY_INTERFACE_MODE_SGMII ||
 	     state->interface == PHY_INTERFACE_MODE_10GBASER))
 		rtl9300_serdes_setup(port, sds_num, state->interface);
 
