@@ -1639,6 +1639,18 @@ define Device/extreme-networks_ws-ap3805i
 endef
 TARGET_DEVICES += extreme-networks_ws-ap3805i
 
+define Device/fenvi_wdr302a-v2
+  SOC := qca9531
+  DEVICE_VENDOR := Fenvi
+  DEVICE_MODEL := WDR302A V2.0
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  IMAGE_SIZE := 16000k
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | \
+	append-rootfs | pad-rootfs
+endef
+TARGET_DEVICES += fenvi_wdr302a-v2
+
 define Device/fortinet_fap_common
   $(Device/senao_loader_okli)
   DEVICE_VENDOR := Fortinet

@@ -980,3 +980,15 @@ define Device/tplink_wbs510-v2
   TPLINK_BOARD_ID := WBS510V2
 endef
 TARGET_DEVICES += tplink_wbs510-v2
+
+define Device/tplink_tl-wr941nd-v6-16meg
+  $(Device/tplink-16mlzma)
+  SOC := tp9343
+  DEVICE_MODEL := TL-WR941ND
+  DEVICE_VARIANT := v6 16M Upgrade
+  DEVICE_PACKAGES := kmod-ath9k kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  TPLINK_HWID := 0x09410006
+  SUPPORTED_DEVICES += tl-wr941nd-v6-16meg
+endef
+TARGET_DEVICES += tplink_tl-wr941nd-v6-16meg
+

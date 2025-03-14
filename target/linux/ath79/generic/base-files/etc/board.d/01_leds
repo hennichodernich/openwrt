@@ -487,6 +487,9 @@ tplink,tl-wr941hp-v1)
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1" "link tx rx"
 	ucidef_set_led_switch "lan" "LAN" "blue:lan" "switch0" "0x1e"
 	;;
+tplink,tl-wr940n-v6-16meg)
+	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1"
+	;;
 trendnet,tew-823dru)
 	ucidef_set_led_netdev "wan" "WAN" "green:planet" "eth0"
 	;;
