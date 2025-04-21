@@ -981,14 +981,15 @@ define Device/tplink_wbs510-v2
 endef
 TARGET_DEVICES += tplink_wbs510-v2
 
-define Device/tplink_tl-wr941nd-v6-16meg
+define Device/ausek_cp-0085-16meg
   $(Device/tplink-16mlzma)
   SOC := tp9343
-  DEVICE_MODEL := TL-WR941ND
-  DEVICE_VARIANT := v6 16M Upgrade
-  DEVICE_PACKAGES := kmod-ath9k kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  DEVICE_VENDOR := Ausek
+  DEVICE_MODEL := CP-0085
+  DEVICE_VARIANT := 16M Upgrade
+  DEVICE_PACKAGES := kmod-ath9k
   TPLINK_HWID := 0x09410006
-  SUPPORTED_DEVICES += tl-wr941nd-v6-16meg
+  SUPPORTED_DEVICES += ausek_cp-0085-16meg
 endef
-TARGET_DEVICES += tplink_tl-wr941nd-v6-16meg
+TARGET_DEVICES += ausek_cp-0085-16meg
 

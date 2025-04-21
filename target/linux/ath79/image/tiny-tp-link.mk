@@ -525,15 +525,16 @@ define Device/tplink_tl-wr941nd-v6
 endef
 TARGET_DEVICES += tplink_tl-wr941nd-v6
 
-define Device/tplink_tl-wr941nd-v6-8meg
-  $(Device/tplink-8mlzma)
+define Device/ausek_cp-0085
+  $(Device/tplink-4mlzma)
   SOC := tp9343
-  DEVICE_MODEL := TL-WR941ND
-  DEVICE_VARIANT := v6 8M Upgrade
+  DEVICE_VENDOR := Ausek
+  DEVICE_MODEL := CP-0085
+  DEVICE_VARIANT := Basic
   TPLINK_HWID := 0x09410006
-  SUPPORTED_DEVICES += tl-wr941nd-v6-8meg
+  SUPPORTED_DEVICES += ausek_cp-0085
 endef
-TARGET_DEVICES += tplink_tl-wr941nd-v6-8meg
+TARGET_DEVICES += ausek_cp-0085
 
 define Device/tplink_tl-wr941n-v7-cn
   $(Device/tplink-4mlzma)

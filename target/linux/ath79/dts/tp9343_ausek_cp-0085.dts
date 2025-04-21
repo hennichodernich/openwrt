@@ -78,10 +78,6 @@
 	nvmem-cell-names = "mac-address";
 };
 
-&eth1 {
-	status = "okay";
-};
-
 &wmac {
 	status = "okay";
 
@@ -168,11 +164,6 @@
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 	};
-};
-
-&eth1 {
-	nvmem-cells = <&macaddr_uboot_1fc00 (-1)>;
-	nvmem-cell-names = "mac-address";
 };
 
 / {
