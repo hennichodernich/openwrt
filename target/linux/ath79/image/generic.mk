@@ -2050,6 +2050,16 @@ define Device/librerouter_librerouter-v1
 endef
 TARGET_DEVICES += librerouter_librerouter-v1
 
+define Device/longdata_aps256
+  SOC := ar9344
+  DEVICE_VENDOR := LONGDATA
+  DEVICE_MODEL := APS256
+  DEVICE_PACKAGES := kmod-usb2
+  IMAGE_SIZE := 16192k
+  SUPPORTED_DEVICES += aps256
+endef
+TARGET_DEVICES += longdata_aps256
+
 define Device/meraki_mr12
   SOC := ar7242
   DEVICE_VENDOR := Meraki
@@ -2171,6 +2181,16 @@ define Device/nec_wg1800hp2
   DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca988x-ct
 endef
 TARGET_DEVICES += nec_wg1800hp2
+
+define Device/nec_wg2200hp
+  SOC := qca9558
+  DEVICE_MODEL := Aterm WG2200HP
+  IMAGE_SIZE := 16128k
+  NEC_FW_TYPE := H055
+  $(Device/nec-netbsd-aterm)
+  DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca9984-ct
+endef
+TARGET_DEVICES += nec_wg2200hp
 
 define Device/nec_wg800hp
   SOC := qca9563
