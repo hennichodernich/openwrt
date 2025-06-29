@@ -649,6 +649,19 @@ define Device/tplink_archer-c50-v6
 endef
 TARGET_DEVICES += tplink_archer-c50-v6
 
+define Device/tplink_archer-c50-v6-16meg
+  $(Device/tplink-v2)
+  IMAGE_SIZE := 15808k
+  DEVICE_MODEL := Archer C50
+  DEVICE_VARIANT := v6 (CA/EU/RU) 16Meg Upgrade
+  TPLINK_FLASHLAYOUT := 16Mmtk
+  TPLINK_HWID := 0x0C500006
+  TPLINK_HWREVADD := 0x6
+  DEVICE_PACKAGES := kmod-mt7615e kmod-mt7663-firmware-ap
+  IMAGES := sysupgrade.bin
+endef
+TARGET_DEVICES += tplink_archer-c50-v6-16meg
+
 define Device/tplink_archer-mr200-v5
   $(Device/tplink-v2)
   IMAGE_SIZE := 7872k
