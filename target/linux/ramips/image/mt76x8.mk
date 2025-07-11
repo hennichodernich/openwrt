@@ -964,6 +964,22 @@ define Device/tplink_tl-wr902ac-v4
 endef
 TARGET_DEVICES += tplink_tl-wr902ac-v4
 
+define Device/tplink_tl-wr902ac-v4-16meg
+  $(Device/tplink-v2)
+  IMAGE_SIZE := 16000k
+  DEVICE_MODEL := TL-WR902AC
+  DEVICE_VARIANT := v4 16Meg Upgrade
+  TPLINK_FLASHLAYOUT := 16Mmtk
+  TPLINK_HWID := 0x000dc88f
+  TPLINK_HWREV := 0x89
+  TPLINK_HWREVADD := 0x1
+  DEVICE_PACKAGES := kmod-mt7615e kmod-mt7663-firmware-ap kmod-usb2 kmod-usb-ohci \
+	kmod-usb-ledtrig-usbport
+  IMAGES := sysupgrade.bin tftp-recovery.bin
+  IMAGE/tftp-recovery.bin := pad-extra 128k | $$(IMAGE/factory.bin)
+endef
+TARGET_DEVICES += tplink_tl-wr902ac-v4-16meg
+
 define Device/unielec_u7628-01-16m
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := UniElec
